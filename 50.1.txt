@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+
+int C(int k, int n)
+{
+    if (k == 0 || k == n) return 1;
+    if (k == 1) return n;
+    return C(k - 1, n - 1) + C(k, n - 1);
+}
+
+
+
+int main(){
+	int k,n,kq,i,j;
+	do
+	{printf("Nhap n= ");
+	scanf("%d", &n);}
+	while (n>15);
+	printf("Nhap k= ");
+	scanf("%d", &k);
+	kq= C(k,n);
+	printf("%d", kq);
+	printf("\ntam giac pascal\n");
+
+	for (int i = 0; i <= n; i++)
+    {
+
+        for (j=0;j<=50-2*i;j++) printf(" ");
+        for (int j = 0; j <= i; j++)
+        {
+            printf("%4d", C(j,i));
+
+        }
+        printf("\n");
+    }
+
+
+
+
+
+}
+

@@ -1,0 +1,82 @@
+//CHUONG TRINH NHAP VAO MANG VA IN RA MANG SAU KHI XOA CAC SO HOAN HAO
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct array
+{
+    char number[100];
+};
+
+long int check(char n[])
+{
+    long int s = 0;
+    for (long int i = 0; i < strlen(n); i++)
+    {
+        if (n[i] < '0' || n[i] > '9')
+        {
+            return 0;
+            break;
+        }
+        s += 1;
+	}
+	if(s!=0) return 1;
+}
+
+long int shh(long int n)
+{
+    int s = 0;
+    if (n <= 0)
+    {
+        return 0;
+    }
+    else
+    {
+        for (long int i = 1; i < n; i++)
+        {
+            if (n % i == 0)
+                s+=i;
+        }
+    }
+    if (s==n) return 1;
+    if (s!=n) return 0;
+}
+main()
+{
+    struct array *ptr;
+    long int i, n, j, val;
+    printf("Enter n = ");
+    scanf("%ld", &n);
+    ptr = (struct array*) malloc(n * sizeof(struct array));
+    printf("\nNhap mang:\n");
+    for (i = 0; i < n; i++)
+    {
+        printf("a[%d] = ", i);
+        scanf("%s", &(ptr+i) -> number);
+    }
+    printf("\nIn mang vua nhap\n");
+    for (j = 0; j < n; j++)
+    {
+        printf("%s  ", (ptr+j) -> number);
+    }
+    printf("\nXoa cac so hoan hao trong mang va in ra mang:\n");
+    for (i = 0; i < n; i++)
+    {
+        if (check((ptr+i)->number) == 1)
+        {
+            val = atoi((ptr+i)->number);
+            if (shh(val) == 1)
+            {
+                continue;
+            }
+            else
+            {
+                printf("%ld  ", val);
+            }
+        }
+        else
+        {
+            printf("%s  ",(ptr+i)->number);
+        }
+    }
+}

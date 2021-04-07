@@ -1,0 +1,98 @@
+/*Nh?p ma tr?n A và dua các ph?n t? c?a t?ng hàng c?a ma tr?n lên du?ng chéo chính, và tính t?ng các ph?n t? l?n nh?t dó*/
+#include <stdio.h>
+#include <stdlib.h>
+
+struct array
+{
+    float b[100][100];
+};
+void nhap(float a[][100], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("a[%d][%d] = ", i, j);
+            scanf("%f", &a[i][j]);
+        }
+    }
+}
+
+void xuat(float a[][100], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("%.1f\t", a[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+main()
+{
+    int n, i, j, dem = 0;
+    struct array *ptr;
+    float a[100][100];
+    do
+    {
+        printf("Nhap cap cua ma tran A: n = ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
+    ptr = (struct array *) malloc(n*sizeof(struct array));
+    nhap(a, n);
+    printf("\nIn ma tran vua nhap:\n");
+    xuat(a, n);
+    printf("\nChuyen tung hang len duong cheo:\n");
+    while (dem < n)
+    {
+
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+            {
+                if (i == j)
+                {
+                    (ptr+dem)->b[i][j] = a[dem][j];
+                }
+                else
+                {
+                    (ptr+dem)->b[i][j] = 0;
+                }
+            }
+        }
+        dem ++;
+    }
+    dem = 0;
+    while (dem < n)
+    {
+        printf("Hang %d:\n", dem + 1);
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                printf("%.1f\t", (ptr+dem)->b[i][j]);
+            }
+            printf("\n");
+        }
+        dem++;
+    }
+    float sum = 0, num;
+    for (i = 0; i < n; i++)
+    {
+         num = a[i][0];
+         for (j = 0; j < n; j++)
+         {
+             if (num < a[i][j])
+             {
+                 num = a[i][j];
+             }
+         }
+         sum += num;
+    }
+    printf("\nSum = %.2f", sum);
+    printf("\n");
+    getch();
+}
